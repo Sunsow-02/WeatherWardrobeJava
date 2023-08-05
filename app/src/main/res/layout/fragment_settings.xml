@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.settings.SettingsFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/temp_unit_header"/>
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/temp_option_group">
+                <RadioButton android:id="@+id/radio_f"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/farenheight" />
+                <RadioButton android:id="@+id/radio_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/celsius" />
+                <RadioButton android:id="@+id/radio_k"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kelvin" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/temperature_header"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temperature_note"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/temp_lvl_2_min_input"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/temp_lvl_2_min"
+                    android:inputType="text"/>
+                <EditText
+                    android:id="@+id/temp_lvl_2_max_input"
+                    android:layout_height="match_parent"
+                    android:layout_width="fill_parent"
+                    android:hint="@string/temp_lvl_2_max"
+                    android:layout_weight="1"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/temp_lvl_3_min_input"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/temp_lvl_3_min"
+                    android:inputType="text"/>
+                <EditText
+                    android:id="@+id/temp_lvl_3_max_input"
+                    android:layout_height="match_parent"
+                    android:layout_width="fill_parent"
+                    android:hint="@string/temp_lvl_3_max"
+                    android:layout_weight="1"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/temp_lvl_4_min_input"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/temp_lvl_4_min"
+                    android:inputType="text"/>
+                <EditText
+                    android:id="@+id/temp_lvl_4_max_input"
+                    android:layout_height="match_parent"
+                    android:layout_width="fill_parent"
+                    android:hint="@string/temp_lvl_4_max"
+                    android:layout_weight="1"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/humidity_header"/>
+
+            <EditText
+                android:id="@+id/humidity_umbrella_min_input"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:hint="@string/humidity_umbrella_min"
+                android:inputType="text"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <EditText
+                    android:id="@+id/humidity_raincoat_min_input"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:hint="@string/humidity_raincoat_min"
+                    android:inputType="text"/>
+                <EditText
+                    android:id="@+id/windspeed_raincoat_min_input"
+                    android:layout_height="match_parent"
+                    android:layout_width="fill_parent"
+                    android:hint="@string/windspeed_raincoat_min"
+                    android:layout_weight="1"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/switch_headers"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:text="@string/switch1"
+                android:id="@+id/scarf_toggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:text="@string/switch2"
+                android:layout_width="wrap_content"
+                android:id="@+id/mittens_toggle"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/save_changes_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/save_changes_button"/>
+                <Button
+                    android:id="@+id/cancel_changes_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/cancel_changes_button"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
