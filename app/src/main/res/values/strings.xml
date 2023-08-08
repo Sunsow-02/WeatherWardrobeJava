@@ -27,4 +27,5 @@
     <string name="cancel_changes_button">Cancel</string>
     <string name="coordinates_long_hint">Longitude</string>
     <string name="coordinates_lati_hint">Latitude</string>
+    <string name="submit_coordinates_button">Submit Coordinates</string>
 </resources>

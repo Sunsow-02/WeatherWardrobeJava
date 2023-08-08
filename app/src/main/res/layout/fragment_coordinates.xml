@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/coordinates_parent"
     tools:context=".ui.coordinates.CoordinatesFragment">
 
     <LinearLayout
@@ -42,6 +43,12 @@
                 android:layout_weight="1"
                 android:inputType="text"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/submit_coordinates_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_coordinates_button"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

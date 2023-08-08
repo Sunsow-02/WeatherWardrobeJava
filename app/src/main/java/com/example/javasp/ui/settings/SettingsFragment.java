@@ -15,11 +15,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.javasp.R;
 import com.example.javasp.databinding.FragmentSettingsBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
     public int temperature_option = 0; //change this to instead pull from saved data
+    public boolean scarf_enabled = false;
+    public boolean mittens_enabled = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -35,7 +38,6 @@ public class SettingsFragment extends Fragment {
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // checkedId is the RadioButton selected
-
                 if(checkedId == R.id.radio_f) {
                     temperature_option = 0;
                 }
@@ -48,11 +50,34 @@ public class SettingsFragment extends Fragment {
             }
         });
 
-        //SwitchCompat scarf_toggle = getView().findViewById(R.id.scarf_toggle);
-        //SwitchCompat mittens_toggle = getView().findViewById(R.id.mittens_toggle);
+        SwitchCompat scarf_toggle = root.findViewById(R.id.scarf_toggle);
+        scarf_toggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scarf_enabled = !scarf_enabled;
+            }
+        });
+        SwitchCompat mittens_toggle = root.findViewById(R.id.mittens_toggle);
+        mittens_toggle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mittens_enabled = !mittens_enabled;
+            }
+        });
 
-        //Button save_button = getView().findViewById(R.id.save_changes_button);
-        //Button cancel_button = getView().findViewById(R.id.cancel_changes_button);
+        Button save_button = root.findViewById(R.id.save_changes_button);
+        save_button.setOnClickListener(new Button.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                //save changes (do this after implementing functionality of all other ui elements
+
+                //popup to notify user
+                Snackbar.make(getActivity().findViewById(R.id.settings_parent)
+                                , "Changes Saved", Snackbar.LENGTH_SHORT)
+                        .show();
+            }
+        });
 
         return root;
     }
