@@ -24,25 +24,37 @@
             android:textStyle="bold"
             android:text="@string/title_coordinates"/>
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/coordinates_longitude_input"
+            app:endIconMode="clear_text"
+            android:layout_weight="1"
+            android:hint="@string/coordinates_long_hint">
+            <com.google.android.material.textfield.TextInputEditText
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
-                android:layout_weight="1"
-                android:hint="@string/coordinates_long_hint"
-                android:inputType="text"/>
-            <EditText
+                android:layout_width="match_parent"
+                android:id="@+id/coordinates_longitude_input"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            android:layout_weight="1"
+            android:hint="@string/coordinates_lati_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
                 android:id="@+id/coordinates_latitude_input"
-                android:layout_height="match_parent"
-                android:layout_width="fill_parent"
-                android:hint="@string/coordinates_lati_hint"
-                android:layout_weight="1"
-                android:inputType="text"/>
-        </LinearLayout>
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
 
         <Button
             android:id="@+id/submit_coordinates_button"

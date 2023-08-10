@@ -14,12 +14,12 @@
     <string name="farenheight">Farenheight</string>
     <string name="celsius">Celsius</string>
     <string name="kelvin">Kelvin</string>
-    <string name="temp_lvl_2_min">Level 2 Min</string>
-    <string name="temp_lvl_2_max">Level 2 Max</string>
-    <string name="temp_lvl_3_min">Level 3 Min</string>
-    <string name="temp_lvl_3_max">Level 3 Max</string>
-    <string name="temp_lvl_4_min">Level 4 Min</string>
-    <string name="temp_lvl_4_max">Level 4 Max</string>
+    <string name="temp_lvl_2_min">Level 2 Min Temp</string>
+    <string name="temp_lvl_2_max">Level 2 Max Temp</string>
+    <string name="temp_lvl_3_min">Level 3 Min Temp</string>
+    <string name="temp_lvl_3_max">Level 3 Max Temp</string>
+    <string name="temp_lvl_4_min">Level 4 Min Temp</string>
+    <string name="temp_lvl_4_max">Level 4 Max Temp</string>
     <string name="humidity_umbrella_min">Min humidity for umbrella</string>
     <string name="humidity_raincoat_min">Min humidity for raincoat</string>
     <string name="windspeed_raincoat_min">Min windspeed for raincoat</string>
@@ -28,4 +28,5 @@
     <string name="coordinates_long_hint">Longitude</string>
     <string name="coordinates_lati_hint">Latitude</string>
     <string name="submit_coordinates_button">Submit Coordinates</string>
+    <string name="raincoat_header">Raincoat Settings</string>
 </resources>
