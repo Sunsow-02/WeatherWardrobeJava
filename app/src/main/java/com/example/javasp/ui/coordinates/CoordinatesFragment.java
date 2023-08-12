@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.javasp.R;
 import com.example.javasp.databinding.FragmentCoordinatesBinding;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class CoordinatesFragment extends Fragment {
 
@@ -32,12 +34,38 @@ public class CoordinatesFragment extends Fragment {
         {
             @Override
             public void onClick(View view) {
-                //save changes (do this after implementing functionality of all other ui elements
+                TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
+                TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
+                TextInputLayout long_layout = getActivity().findViewById(R.id.coordinates_longitude_layout);
+                TextInputLayout lati_layout = getActivity().findViewById(R.id.coordinates_latitude_layout);
+                float longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));
+                float latitude_val = Float.parseFloat(String.valueOf(latitude.getText()));
+                int error = 0;
+                //check to see we got input/valid coordinates
+                if(latitude_val < -90 || latitude_val > 90) {
+                        lati_layout.setError("Latitude is invalid"); lati_layout.setErrorEnabled(true);
+                        error = 1;
+                }
 
-                //popup to notify user
-                Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                , "Coordinates Submitted", Snackbar.LENGTH_SHORT)
-                        .show();
+                if(longitude_val < -180 || longitude_val > 180) {
+                        long_layout.setError("Longitude is invalid"); long_layout.setErrorEnabled(true);
+                        error = 1;
+                }
+
+                if(error == 0) {
+                    lati_layout.setErrorEnabled(false);
+                    long_layout.setErrorEnabled(false);
+                    //popup to notify user
+                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                                    , "Coordinates Submitted", Snackbar.LENGTH_SHORT)
+                            .show();
+                    //weather api and get the stuff
+                }
+                else {
+                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                                    , "Errors with Coordinates Submitted", Snackbar.LENGTH_SHORT)
+                            .show();
+                }
             }
         });
 
