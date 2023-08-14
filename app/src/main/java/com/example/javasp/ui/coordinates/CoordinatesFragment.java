@@ -46,15 +46,19 @@ public class CoordinatesFragment extends Fragment {
                         lati_layout.setError("Latitude is invalid"); lati_layout.setErrorEnabled(true);
                         error = 1;
                 }
+                else {
+                    lati_layout.setErrorEnabled(false);
+                }
 
                 if(longitude_val < -180 || longitude_val > 180) {
                         long_layout.setError("Longitude is invalid"); long_layout.setErrorEnabled(true);
                         error = 1;
                 }
+                else {
+                    long_layout.setErrorEnabled(false);
+                }
 
                 if(error == 0) {
-                    lati_layout.setErrorEnabled(false);
-                    long_layout.setErrorEnabled(false);
                     //popup to notify user
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
                                     , "Coordinates Submitted", Snackbar.LENGTH_SHORT)
@@ -63,7 +67,7 @@ public class CoordinatesFragment extends Fragment {
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                    , "Errors with Coordinates Submitted", Snackbar.LENGTH_SHORT)
+                                    , "Errors with Coordinates", Snackbar.LENGTH_SHORT)
                             .show();
                 }
             }
