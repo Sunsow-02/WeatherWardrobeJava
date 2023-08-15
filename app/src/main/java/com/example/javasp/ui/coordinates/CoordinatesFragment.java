@@ -38,8 +38,14 @@ public class CoordinatesFragment extends Fragment {
                 TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
                 TextInputLayout long_layout = getActivity().findViewById(R.id.coordinates_longitude_layout);
                 TextInputLayout lati_layout = getActivity().findViewById(R.id.coordinates_latitude_layout);
-                float longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));
-                float latitude_val = Float.parseFloat(String.valueOf(latitude.getText()));
+                float longitude_val = 0;
+                float latitude_val = 0;
+                if(!longitude.getText().toString().equals("")) {
+                    longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));
+                }
+                if(!latitude.getText().toString().equals("")) {
+                    latitude_val = Float.parseFloat(String.valueOf(latitude.getText()));
+                }
                 int error = 0;
                 //check to see we got input/valid coordinates
                 if(latitude_val < -90 || latitude_val > 90) {
@@ -61,7 +67,7 @@ public class CoordinatesFragment extends Fragment {
                 if(error == 0) {
                     //popup to notify user
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                    , "Coordinates Submitted", Snackbar.LENGTH_SHORT)
+                                    , "Getting weather info for: " + longitude_val + "," + latitude_val, Snackbar.LENGTH_SHORT)
                             .show();
                     //weather api and get the stuff
                 }

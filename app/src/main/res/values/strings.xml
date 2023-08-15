@@ -8,8 +8,8 @@
     <string name="switch1">Scarf Recommended</string>
     <string name="switch2">Mittens Recommended</string>
     <string name="temperature_header">Temperature Ranges</string>
-    <string name="temperature_note">Note: Temperatures less than min of Level 2 will recommend Level 1, and Level 5 recommended for temperatures above the max of Level 4</string>
-    <string name="humidity_header">Humidity/Windspeed Ranges</string>
+    <string name="temperature_note">Temp(s) less than min of Lvl2 will recommend Lvl1, and Lvl5 recommended for temp(s) above the max of Lvl4</string>
+    <string name="humidity_header">Humidity Setting(s)</string>
     <string name="temp_unit_header">Temperature Unit</string>
     <string name="farenheight">Farenheight</string>
     <string name="celsius">Celsius</string>
@@ -20,13 +20,12 @@
     <string name="temp_lvl_3_max">Level 3 Max Temp</string>
     <string name="temp_lvl_4_min">Level 4 Min Temp</string>
     <string name="temp_lvl_4_max">Level 4 Max Temp</string>
-    <string name="humidity_umbrella_min">Min humidity for umbrella</string>
-    <string name="humidity_raincoat_min">Min humidity for raincoat</string>
+    <string name="humidity_umbrella_max">Max humidity for umbrella</string>
     <string name="windspeed_raincoat_min">Min windspeed for raincoat</string>
     <string name="save_changes_button">Save Changes</string>
     <string name="cancel_changes_button">Cancel</string>
     <string name="coordinates_long_hint">Longitude</string>
     <string name="coordinates_lati_hint">Latitude</string>
     <string name="submit_coordinates_button">Submit Coordinates</string>
-    <string name="raincoat_header">Raincoat Settings</string>
+    <string name="humidity_note">Raincoat is recommended for humidities > umbrella max</string>
 </resources>
