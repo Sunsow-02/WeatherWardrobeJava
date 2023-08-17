@@ -23,14 +23,19 @@ public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
     public int temperature_option = 0; //change this to instead pull from saved data
+    float lvl2_min_val = 35; float lvl2_max_val = 45;
+    float lvl3_max_val = 75;
+    float lvl4_max_val = 85;
+    float humidity_umbrella_max_val = 10;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
 
+    public void saveSettings() {
+
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        //SettingsViewModel notificationsViewModel =
-        //        new ViewModelProvider(this).get(SettingsViewModel.class);
-
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -74,10 +79,6 @@ public class SettingsFragment extends Fragment {
             public void onClick(View view) {
                 TextInputEditText lvl2_min_input = getActivity().findViewById(R.id.temp_lvl_2_min_input);
                 TextInputLayout lvl2_min_layout = getActivity().findViewById(R.id.temp_lvl_2_min_layout);
-                float lvl2_min_val = 0; float lvl2_max_val = 0;
-                float lvl3_min_val = 0; float lvl3_max_val = 0;
-                float lvl4_min_val = 0; float lvl4_max_val = 0;
-                float humidity_umbrella_max_val = 0;
                 int error = 0;
                 if(!lvl2_min_input.getText().toString().equals("")) {
                     lvl2_min_val = Float.parseFloat(String.valueOf(lvl2_min_input.getText()));
@@ -95,15 +96,6 @@ public class SettingsFragment extends Fragment {
                     lvl2_max_layout.setError("No input"); lvl2_max_layout.setErrorEnabled(true);
                     error = 1;
                 }
-                TextInputEditText lvl3_min_input = getActivity().findViewById(R.id.temp_lvl_3_min_input);
-                TextInputLayout lvl3_min_layout = getActivity().findViewById(R.id.temp_lvl_3_min_layout);
-                if(!lvl3_min_input.getText().toString().equals("")) {
-                    lvl3_min_val = Float.parseFloat(String.valueOf(lvl3_min_input.getText()));
-                }
-                else {
-                    lvl3_min_layout.setError("No input"); lvl3_min_layout.setErrorEnabled(true);
-                    error = 1;
-                }
                 TextInputEditText lvl3_max_input = getActivity().findViewById(R.id.temp_lvl_3_max_input);
                 TextInputLayout lvl3_max_layout = getActivity().findViewById(R.id.temp_lvl_3_max_layout);
                 if(!lvl3_max_input.getText().toString().equals("")) {
@@ -111,15 +103,6 @@ public class SettingsFragment extends Fragment {
                 }
                 else {
                     lvl3_max_layout.setError("No input"); lvl3_max_layout.setErrorEnabled(true);
-                    error = 1;
-                }
-                TextInputEditText lvl4_min_input = getActivity().findViewById(R.id.temp_lvl_4_min_input);
-                TextInputLayout lvl4_min_layout = getActivity().findViewById(R.id.temp_lvl_4_min_layout);
-                if(!lvl4_min_input.getText().toString().equals("")) {
-                    lvl4_min_val = Float.parseFloat(String.valueOf(lvl4_min_input.getText()));
-                }
-                else {
-                    lvl4_min_layout.setError("No input"); lvl4_min_layout.setErrorEnabled(true);
                     error = 1;
                 }
                 TextInputEditText lvl4_max_input = getActivity().findViewById(R.id.temp_lvl_4_max_input);
@@ -184,43 +167,25 @@ public class SettingsFragment extends Fragment {
                         }
                     }
 
-                    if (lvl2_max_val >= lvl3_min_val) {
-                        lvl2_max_layout.setError("Lvl2 max can't be >/= Lvl3 min");
+                    if (lvl2_max_val >= lvl3_max_val) {
+                        lvl2_max_layout.setError("Lvl2 max can't be >/= Lvl3 max");
                         lvl2_max_layout.setErrorEnabled(true);
                         error = 1;
                     } else {
                         lvl2_max_layout.setErrorEnabled(false);
                     }
 
-                    if (lvl3_min_val >= lvl3_max_val) {
-                        lvl3_min_layout.setError("Lvl3 min can't be >/= Lvl3 max");
-                        lvl3_min_layout.setErrorEnabled(true);
-                        error = 1;
-                    } else {
-                        lvl3_min_layout.setErrorEnabled(false);
-                    }
-
-                    if (lvl3_max_val >= lvl4_min_val) {
-                        lvl3_max_layout.setError("Lvl3 max can't be >/= Lvl4 min");
+                    if (lvl3_max_val >= lvl4_max_val) {
+                        lvl3_max_layout.setError("Lvl3 max can't be >/= Lvl4 max");
                         lvl3_max_layout.setErrorEnabled(true);
                         error = 1;
                     } else {
                         lvl3_max_layout.setErrorEnabled(false);
                     }
-
-                    if (lvl4_min_val >= lvl4_max_val) {
-                        lvl4_min_layout.setError("Lvl4 min can't be >/= Lvl4 max");
-                        lvl4_min_layout.setErrorEnabled(true);
-                        error = 1;
-                    } else {
-                        lvl4_min_layout.setErrorEnabled(false);
-                    }
                 }
-
-                //save changes
-
                 //popup to notify user (consider switching to case statement for better snackbar msgs??? - look at this at very end of polishing after api hell has been conquered)
                 if(error == 0) {
+                    saveSettings();
                     Snackbar.make(getActivity().findViewById(R.id.settings_parent)
                                     , "Changes Saved", Snackbar.LENGTH_SHORT)
                             .show();

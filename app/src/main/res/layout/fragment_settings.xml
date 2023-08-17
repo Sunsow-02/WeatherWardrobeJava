@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:checkedButton="@+id/radio_f"
                 android:id="@+id/temp_option_group">
                 <RadioButton android:id="@+id/radio_f"
                     android:layout_width="wrap_content"
@@ -91,24 +92,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/temp_lvl_3_min_layout"
-                    app:endIconMode="clear_text"
-                    android:layout_weight="1"
-                    android:hint="@string/temp_lvl_3_min">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:id="@+id/temp_lvl_3_min_input"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -120,25 +103,6 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/temp_lvl_3_max_input"
-                        android:inputType="text" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/temp_lvl_4_min_layout"
-                    app:endIconMode="clear_text"
-                    android:layout_weight="1"
-                    android:hint="@string/temp_lvl_4_min">
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:id="@+id/temp_lvl_4_min_input"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,7 +119,6 @@
                         android:id="@+id/temp_lvl_4_max_input"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
 
 
             <TextView
