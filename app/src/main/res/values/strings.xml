@@ -28,4 +28,12 @@
     <string name="coordinates_lati_hint">Latitude</string>
     <string name="submit_coordinates_button">Submit Coordinates</string>
     <string name="humidity_note">Raincoat is recommended for humidities > umbrella max</string>
+    <string name="temp_option_key">KZgozUK</string>
+    <string name="temp_lvl2min_key">52fz9PT</string>
+    <string name="temp_lvl2max_key">awnQQlp</string>
+    <string name="temp_lvl3max_key">tLYos1B</string>
+    <string name="temp_lvl4max_key">XEY8BrB</string>
+    <string name="humidity_umbrella_max_key">SU4NeKk</string>
+    <string name="scarf_enabled_key">arbjo53</string>
+    <string name="mittens_enabled_key">ryL9a7q</string>
 </resources>

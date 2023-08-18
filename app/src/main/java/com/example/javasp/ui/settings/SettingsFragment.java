@@ -1,5 +1,7 @@
 package com.example.javasp.ui.settings;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,11 @@ public class SettingsFragment extends Fragment {
     public boolean mittens_enabled = false;
 
     public void saveSettings() {
-
+        SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE); //might cause problems (look into workaround for getDefaultSharedPref)
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.temp_option_key), temperature_option);
+        //TODO: put all the stuff for the rest of the strings/keys
+        editor.apply();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -197,6 +203,8 @@ public class SettingsFragment extends Fragment {
                 }
             }
         });
+
+        //TODO: retrieve settings saved if applicable and restore them
 
         return root;
     }
