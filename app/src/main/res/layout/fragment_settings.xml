@@ -4,21 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:id="@+id/settings_parent"
     tools:context=".ui.settings.SettingsFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/myCoordinatorLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        tools:ignore="MissingConstraints">
-
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:padding="16dp"
             android:orientation="vertical">
 
@@ -97,7 +89,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/temp_lvl_3_max_layout"
                     app:endIconMode="clear_text"
-                    android:layout_weight="1"
                     android:hint="@string/temp_lvl_3_max">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_height="wrap_content"
@@ -111,7 +102,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/temp_lvl_4_max_layout"
                     app:endIconMode="clear_text"
-                    android:layout_weight="1"
                     android:hint="@string/temp_lvl_4_max">
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_height="wrap_content"
@@ -132,7 +122,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/humidity_umbrella_layout"
                 app:endIconMode="clear_text"
-                android:layout_weight="1"
                 android:hint="@string/humidity_umbrella_max">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_height="wrap_content"
@@ -177,5 +166,4 @@
             </LinearLayout>
 
         </LinearLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

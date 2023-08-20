@@ -9,9 +9,6 @@
     tools:context=".ui.coordinates.CoordinatesFragment">
 
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
@@ -63,6 +60,97 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/submit_coordinates_button"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/coordinates_rec_level_layout"
+            android:hint="@string/coordinates_rec_level_hint">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/coordinates_rec_level_text"
+            android:text="Placeholder"
+            android:focusable="false"
+            android:clickable="false"
+            android:cursorVisible="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/coordinates_rec_level_description_layout"
+            android:hint="@string/coordinates_rec_level_description_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/coordinates_rec_level_description_text"
+                android:text="Placeholder Level Description"
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/three_figs_layout"
+            android:visibility="invisible"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/coordinates_temp_layout"
+                app:endIconMode="clear_text"
+                android:layout_weight="1"
+                android:hint="@string/coordinates_temp_hint">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/coordinates_temp_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:text="NUll" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/coordinates_humidity_layout"
+                app:endIconMode="clear_text"
+                android:layout_weight="1"
+                android:hint="@string/coordinates_humidity_hint">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/coordinates_humidity_text"
+                    android:text="NUll"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/coordinates_windspeed_layout"
+                app:endIconMode="clear_text"
+                android:layout_weight="1"
+                android:hint="@string/coordinates_windspeed_hint">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/coordinates_windspeed_text"
+                    android:text="NUll"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:cursorVisible="false"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

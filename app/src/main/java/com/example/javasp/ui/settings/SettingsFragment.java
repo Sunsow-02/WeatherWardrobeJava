@@ -62,13 +62,15 @@ public class SettingsFragment extends Fragment {
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
     }
 
+    RadioGroup radioGroup;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         //radiogroup from temperature option
-        RadioGroup radioGroup = root.findViewById(R.id.temp_option_group);
+        radioGroup = root.findViewById(R.id.temp_option_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {

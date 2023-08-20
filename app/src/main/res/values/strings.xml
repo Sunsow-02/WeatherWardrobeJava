@@ -36,4 +36,9 @@
     <string name="humidity_umbrella_max_key">SU4NeKk</string>
     <string name="scarf_enabled_key">arbjo53</string>
     <string name="mittens_enabled_key">ryL9a7q</string>
+    <string name="coordinates_rec_level_hint">Recommended Level:</string>
+    <string name="coordinates_rec_level_description_hint">Level Description:</string>
+    <string name="coordinates_temp_hint">Temperature:</string>
+    <string name="coordinates_humidity_hint">Humidity:</string>
+    <string name="coordinates_windspeed_hint">Wind Speed:</string>
 </resources>
