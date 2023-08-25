@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -20,6 +19,12 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 public class CoordinatesFragment extends Fragment {
 
     private FragmentCoordinatesBinding binding;
@@ -30,6 +35,8 @@ public class CoordinatesFragment extends Fragment {
     float humidity_umbrella_max_val = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
+    float longitude_val = 0;
+    float latitude_val = 0;
 
     public void restoreSettings() {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
@@ -41,6 +48,25 @@ public class CoordinatesFragment extends Fragment {
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
+    }
+
+    public Response requestWeatherAPIinfo() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://weatherapi-com.p.rapidapi.com/current.json?q=" + longitude_val + "%2C" + latitude_val)
+                .get()
+                .addHeader("X-RapidAPI-Key", "6986dd8915msh2eef5c76f8cfe61p14a831jsn211856301e30")
+                .addHeader("X-RapidAPI-Host", "weatherapi-com.p.rapidapi.com")
+                .build();
+
+        try {
+            return client.newCall(request).execute();
+        } catch (IOException e) {
+            Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                            , "Error:" + e.toString(), Snackbar.LENGTH_SHORT)
+                    .show();
+            return null;
+        }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -62,8 +88,6 @@ public class CoordinatesFragment extends Fragment {
                 TextInputLayout long_layout = getActivity().findViewById(R.id.coordinates_longitude_layout);
                 TextInputLayout lati_layout = getActivity().findViewById(R.id.coordinates_latitude_layout);
 
-                float longitude_val = 0;
-                float latitude_val = 0;
                 if(!longitude.getText().toString().equals("")) {
                     longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));
                 }
@@ -94,6 +118,13 @@ public class CoordinatesFragment extends Fragment {
                                     , "Getting weather info for: " + longitude_val + "," + latitude_val, Snackbar.LENGTH_SHORT)
                             .show();
                     //weather api and get the stuff
+                    Response info = requestWeatherAPIinfo();
+                    if(info != null) {
+                        //get temperature, humidity, and wind speed
+                        //then use the settings fetched to determine recommended level and fetch respective description with the
+                        //info just obtained
+                    }
+
                     //settext on the edittext
                     TextInputEditText rec_level = getActivity().findViewById(R.id.coordinates_rec_level_text);
                     TextInputEditText rec_level_description = getActivity().findViewById(R.id.coordinates_rec_level_description_text);
