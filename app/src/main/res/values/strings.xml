@@ -34,9 +34,9 @@
     <string name="mittens_enabled_key">ryL9a7q</string>
     <string name="coordinates_rec_level_hint">Recommended Level:</string>
     <string name="coordinates_rec_level_description_hint">Level Description:</string>
-    <string name="coordinates_temp_hint">Temperature:</string>
-    <string name="coordinates_humidity_hint">Humidity:</string>
-    <string name="coordinates_windspeed_hint">Wind Speed:</string>
+    <string name="coordinates_temp_hint">Temperature</string>
+    <string name="coordinates_humidity_hint">Humidity%</string>
+    <string name="coordinates_windspeed_hint">Wind Speed</string>
     <string name="coordinates_clothing_items_hint">Recommended Clothing Items:</string>
     <string name="level_1_header">Level 1(Extreme)</string>
     <string name="level_2_header">Level 2(Heavy)</string>

@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -124,15 +127,15 @@ public class CoordinatesFragment extends Fragment {
                             .show();
                     //weather api and get the stuff
                     Response info = null;
-                    String url = "https://weatherapi-com.p.rapidapi.com/current.json?q=" + longitude_val + "%2C" + latitude_val;
-                    Log.d("I", url);
-                    //consider switching apis as this is buggy at certain coordinates (0,0)
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                    String currentDateAndTime = sdf.format(new Date());
+                    String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
+                    longitude_val + "%2C" + latitude_val + "/" + currentDateAndTime + "/" +
+                            "?unitGroup=us&key=WL7ANYRTY74KNGD5ZWUTESPEV&contentType=json";
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             .url(url)
                             .get()
-                            .addHeader("X-RapidAPI-Key", "6986dd8915msh2eef5c76f8cfe61p14a831jsn211856301e30")
-                            .addHeader("X-RapidAPI-Host", "weatherapi-com.p.rapidapi.com")
                             .build();
 
                     try {
@@ -150,33 +153,37 @@ public class CoordinatesFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
                         try {
+                            //TODO: perhaps require coordinates instead of defaulting to 0,0 with no input?
                             JSONObject jsonObject = new JSONObject(jsonData);
-                            Log.d("I", "HERE HERE");
-                            Log.d("I",jsonObject.toString());
-                            JSONObject weatherData = jsonObject.getJSONObject("current");
-                            //get temperature, humidity, and wind speed
+                            JSONArray weatherData2 = jsonObject.getJSONArray("days");
                             String recommended_level = "";
                             String recommened_level_description = "";
                             String recommended_clothing_items = "";
-                            float temperature = 0;
+                            String temperature_str = "";
                             float humidity = 0; float wind_speed = 0;
-                            switch(temperature_option) {
+                            JSONObject obj = weatherData2.getJSONObject(0);
+                            Log.d("I", obj.toString());
+                            float temperature = Float.parseFloat(obj.getString("temp"));
+                            humidity = Float.parseFloat(obj.getString("humidity"));
+                            wind_speed = Float.parseFloat(obj.getString("windspeed"));
+                            switch (temperature_option) {
                                 case 0:
-                                    temperature = Float.parseFloat(weatherData.getString("temp_f"));
+                                    temperature_str += String.valueOf(temperature);
+                                    temperature_str += "°F";
                                     break;
                                 case 1:
-                                    temperature = Float.parseFloat(weatherData.getString("temp_c"));
+                                    temperature = (temperature - 32)* (5/9);
+                                    temperature_str += String.valueOf(temperature);
+                                    temperature_str += "°C";
                                     break;
                                 default:
-                                    temperature = Float.parseFloat(weatherData.getString("temp_f"));
-                                    temperature = (float) (273.5 + ((temperature - 32.0) * (5.0/9.0)));
+                                    temperature = (float) ((temperature - 32)* (5/9) + 273.15);
+                                    temperature_str += String.valueOf(temperature);
+                                    temperature_str += "°K";
                                     break;
                             }
-                            humidity = Float.parseFloat(weatherData.getString("humidity"));
-                            wind_speed = Float.parseFloat(weatherData.getString("wind_mph"));
 
-                            //then use the settings/numbers fetched and determine recommended level/respective description
-                            if(humidity > 10) {
+                            if(humidity > 10) { //TODO: maybe put this as a setting
                                 if (humidity <= humidity_umbrella_max_val) {
                                     recommended_clothing_items += "Umbrella\n";
                                 } else {
@@ -184,6 +191,7 @@ public class CoordinatesFragment extends Fragment {
                                 }
                             }
 
+                            //then use the settings/numbers fetched and determine recommended level/respective description
                             if(temperature < lvl2_min_val) {
                                 //if scarf/mittens enabled, add them to recommended clothing items (check project proposal)
                                 if(scarf_enabled) {
@@ -221,9 +229,9 @@ public class CoordinatesFragment extends Fragment {
                             LinearLayout three_figs_layout = getActivity().findViewById(R.id.three_figs_layout);
                             rec_level.setText(recommended_level);
                             rec_level_description.setText(recommened_level_description);
-                            temp.setText(String.valueOf(temperature));
+                            temp.setText(temperature_str);
                             humi.setText(String.valueOf(humidity));
-                            windspd.setText(String.valueOf(wind_speed));
+                            windspd.setText(String.valueOf(wind_speed) + "MPH"); //TODO: make windspeed unit a setting?
                             rec_clothing_items_text.setText(recommended_clothing_items);
                             //make them visible
                             rec_level_layout.setVisibility(View.VISIBLE);
