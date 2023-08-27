@@ -29,7 +29,6 @@ public class SettingsFragment extends Fragment {
     public int temperature_option = 0;
     float lvl2_min_val = 0; float lvl2_max_val = 0;
     float lvl3_max_val = 0;
-    float lvl4_max_val = 0;
     float humidity_umbrella_max_val = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
@@ -41,7 +40,6 @@ public class SettingsFragment extends Fragment {
         editor.putFloat(getString(R.string.temp_lvl2min_key), lvl2_min_val);
         editor.putFloat(getString(R.string.temp_lvl2max_key), lvl2_max_val);
         editor.putFloat(getString(R.string.temp_lvl3max_key), lvl3_max_val);
-        editor.putFloat(getString(R.string.temp_lvl4max_key), lvl4_max_val);
         editor.putFloat(getString(R.string.humidity_umbrella_max_key), humidity_umbrella_max_val);
         editor.putBoolean(getString(R.string.scarf_enabled_key), scarf_enabled);
         editor.putBoolean(getString(R.string.mittens_enabled_key), mittens_enabled);
@@ -56,7 +54,6 @@ public class SettingsFragment extends Fragment {
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
-        lvl4_max_val = sharedPref.getFloat(getString(R.string.temp_lvl4max_key), 85);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
@@ -135,16 +132,6 @@ public class SettingsFragment extends Fragment {
                     lvl3_max_layout.setError("No input"); lvl3_max_layout.setErrorEnabled(true);
                     error = 1;
                 }
-                TextInputEditText lvl4_max_input = getActivity().findViewById(R.id.temp_lvl_4_max_input);
-                TextInputLayout lvl4_max_layout = getActivity().findViewById(R.id.temp_lvl_4_max_layout);
-                if(!lvl4_max_input.getText().toString().equals("")) {
-                    lvl4_max_val = parseFloat(String.valueOf(lvl4_max_input.getText()));
-                    lvl4_max_layout.setErrorEnabled(false);
-                }
-                else {
-                    lvl4_max_layout.setError("No input"); lvl4_max_layout.setErrorEnabled(true);
-                    error = 1;
-                }
                 TextInputEditText humidity_umbrella_max_input = getActivity().findViewById(R.id.humidity_umbrella_max_input);
                 TextInputLayout humidity_umbrella_max_layout = getActivity().findViewById(R.id.humidity_umbrella_layout);
                 if(!humidity_umbrella_max_input.getText().toString().equals("")) {
@@ -205,13 +192,6 @@ public class SettingsFragment extends Fragment {
                         lvl2_max_layout.setErrorEnabled(false);
                     }
 
-                    if (lvl3_max_val >= lvl4_max_val) {
-                        lvl3_max_layout.setError("Lvl3 max can't be >/= Lvl4 max");
-                        lvl3_max_layout.setErrorEnabled(true);
-                        error = 1;
-                    } else {
-                        lvl3_max_layout.setErrorEnabled(false);
-                    }
                 }
                 //popup to notify user (consider switching to case statement for better snackbar msgs??? - look at this at very end of polishing after api hell has been conquered)
                 if(error == 0) {
@@ -245,11 +225,9 @@ public class SettingsFragment extends Fragment {
         TextInputEditText lvl2_min_input = root.findViewById(R.id.temp_lvl_2_min_input);
         TextInputEditText lvl2_max_input = root.findViewById(R.id.temp_lvl_2_max_input);
         TextInputEditText lvl3_max_input = root.findViewById(R.id.temp_lvl_3_max_input);
-        TextInputEditText lvl4_max_input = root.findViewById(R.id.temp_lvl_4_max_input);
         lvl2_min_input.setText(String.valueOf(lvl2_min_val));
         lvl2_max_input.setText(String.valueOf(lvl2_max_val));
         lvl3_max_input.setText(String.valueOf(lvl3_max_val));
-        lvl4_max_input.setText(String.valueOf(lvl4_max_val));
         TextInputEditText humidity_umbrella_max_input = root.findViewById(R.id.humidity_umbrella_max_input);
         humidity_umbrella_max_input.setText(String.valueOf(humidity_umbrella_max_val));
         if(scarf_enabled) {scarf_toggle.toggle(); }

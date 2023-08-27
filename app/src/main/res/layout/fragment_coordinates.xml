@@ -103,7 +103,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/coordinates_temp_layout"
-                app:endIconMode="clear_text"
                 android:layout_weight="1"
                 android:hint="@string/coordinates_temp_hint">
                 <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +119,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/coordinates_humidity_layout"
-                app:endIconMode="clear_text"
                 android:layout_weight="1"
                 android:hint="@string/coordinates_humidity_hint">
                 <com.google.android.material.textfield.TextInputEditText
@@ -137,7 +135,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/coordinates_windspeed_layout"
-                app:endIconMode="clear_text"
                 android:layout_weight="1"
                 android:hint="@string/coordinates_windspeed_hint">
                 <com.google.android.material.textfield.TextInputEditText
@@ -150,6 +147,22 @@
                     android:cursorVisible="false"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/coordinates_clothing_items_layout"
+            android:visibility="invisible"
+            android:hint="@string/coordinates_clothing_items_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/coordinates_clothing_items_text"
+                android:text="NUll"
+                android:focusable="false"
+                android:clickable="false"
+                android:cursorVisible="false"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
