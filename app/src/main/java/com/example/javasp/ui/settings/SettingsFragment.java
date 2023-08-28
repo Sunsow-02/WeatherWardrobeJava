@@ -29,6 +29,7 @@ public class SettingsFragment extends Fragment {
     public int temperature_option = 0;
     float lvl2_min_val = 0; float lvl2_max_val = 0;
     float lvl3_max_val = 0;
+    float humidity_umbrella_min_val = 0;
     float humidity_umbrella_max_val = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
@@ -40,6 +41,7 @@ public class SettingsFragment extends Fragment {
         editor.putFloat(getString(R.string.temp_lvl2min_key), lvl2_min_val);
         editor.putFloat(getString(R.string.temp_lvl2max_key), lvl2_max_val);
         editor.putFloat(getString(R.string.temp_lvl3max_key), lvl3_max_val);
+        editor.putFloat(getString(R.string.humidity_umbrella_min_key), humidity_umbrella_min_val);
         editor.putFloat(getString(R.string.humidity_umbrella_max_key), humidity_umbrella_max_val);
         editor.putBoolean(getString(R.string.scarf_enabled_key), scarf_enabled);
         editor.putBoolean(getString(R.string.mittens_enabled_key), mittens_enabled);
@@ -54,6 +56,7 @@ public class SettingsFragment extends Fragment {
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
+        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
@@ -132,8 +135,19 @@ public class SettingsFragment extends Fragment {
                     lvl3_max_layout.setError("No input"); lvl3_max_layout.setErrorEnabled(true);
                     error = 1;
                 }
+                TextInputEditText humidity_umbrella_min_input = getActivity().findViewById(R.id.humidity_umbrella_min_input);
+                TextInputLayout humidity_umbrella_min_layout = getActivity().findViewById(R.id.humidity_umbrella_min_layout);
+                if(!humidity_umbrella_min_input.getText().toString().equals("")) {
+                    humidity_umbrella_min_val = parseFloat(String.valueOf(humidity_umbrella_min_input.getText()));
+                    humidity_umbrella_min_layout.setErrorEnabled(false);
+                }
+                else {
+                    humidity_umbrella_min_layout.setError("No input");
+                    humidity_umbrella_min_layout.setErrorEnabled(true);
+                    error = 1;
+                }
                 TextInputEditText humidity_umbrella_max_input = getActivity().findViewById(R.id.humidity_umbrella_max_input);
-                TextInputLayout humidity_umbrella_max_layout = getActivity().findViewById(R.id.humidity_umbrella_layout);
+                TextInputLayout humidity_umbrella_max_layout = getActivity().findViewById(R.id.humidity_umbrella_max_layout);
                 if(!humidity_umbrella_max_input.getText().toString().equals("")) {
                     humidity_umbrella_max_val = parseFloat(String.valueOf(humidity_umbrella_max_input.getText()));
                     humidity_umbrella_max_layout.setErrorEnabled(false);
@@ -190,6 +204,14 @@ public class SettingsFragment extends Fragment {
                         error = 1;
                     } else {
                         lvl2_max_layout.setErrorEnabled(false);
+                    }
+
+                    if(humidity_umbrella_min_val >= humidity_umbrella_max_val) {
+                        humidity_umbrella_min_layout.setError("Min can't be >= Max");
+                        humidity_umbrella_min_layout.setErrorEnabled(true);
+                        error = 1;
+                    } else {
+                        humidity_umbrella_min_layout.setErrorEnabled(false);
                     }
 
                 }

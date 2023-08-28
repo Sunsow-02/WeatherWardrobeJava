@@ -39,6 +39,7 @@ public class CoordinatesFragment extends Fragment {
     public int temperature_option = 0;
     float lvl2_min_val = 0; float lvl2_max_val = 0;
     float lvl3_max_val = 0;
+    float humidity_umbrella_min_val = 0;
     float humidity_umbrella_max_val = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
@@ -51,6 +52,7 @@ public class CoordinatesFragment extends Fragment {
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
+        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
@@ -95,6 +97,8 @@ public class CoordinatesFragment extends Fragment {
                 TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
                 TextInputLayout long_layout = getActivity().findViewById(R.id.coordinates_longitude_layout);
                 TextInputLayout lati_layout = getActivity().findViewById(R.id.coordinates_latitude_layout);
+
+                //TODO: perhaps require coordinates instead of defaulting to 0,0 with no input? (low priority)
 
                 if(!longitude.getText().toString().equals("")) {
                     longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));
@@ -153,7 +157,6 @@ public class CoordinatesFragment extends Fragment {
                             throw new RuntimeException(e);
                         }
                         try {
-                            //TODO: perhaps require coordinates instead of defaulting to 0,0 with no input?
                             JSONObject jsonObject = new JSONObject(jsonData);
                             JSONArray weatherData2 = jsonObject.getJSONArray("days");
                             String recommended_level = "";
@@ -183,7 +186,7 @@ public class CoordinatesFragment extends Fragment {
                                     break;
                             }
 
-                            if(humidity > 10) { //TODO: maybe put this as a setting
+                            if(humidity > humidity_umbrella_min_val) {
                                 if (humidity <= humidity_umbrella_max_val) {
                                     recommended_clothing_items += "Umbrella\n";
                                 } else {
@@ -231,7 +234,7 @@ public class CoordinatesFragment extends Fragment {
                             rec_level_description.setText(recommened_level_description);
                             temp.setText(temperature_str);
                             humi.setText(String.valueOf(humidity));
-                            windspd.setText(String.valueOf(wind_speed) + "MPH"); //TODO: make windspeed unit a setting?
+                            windspd.setText(String.valueOf(wind_speed) + "MPH"); //TODO: make windspeed unit a setting? (low priority)
                             rec_clothing_items_text.setText(recommended_clothing_items);
                             //make them visible
                             rec_level_layout.setVisibility(View.VISIBLE);
