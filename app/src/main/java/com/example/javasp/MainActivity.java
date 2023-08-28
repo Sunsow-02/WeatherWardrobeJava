@@ -1,8 +1,16 @@
 package com.example.javasp;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -11,7 +19,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.example.javasp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
+    public FusedLocationProviderClient fusedLocationClient;
     private ActivityMainBinding binding;
 
     @Override
@@ -29,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupWithNavController(binding.navView, navController);
-    }
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+    }
 }
