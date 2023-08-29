@@ -37,26 +37,6 @@ import okhttp3.Response;
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
-    public int temperature_option = 0;
-    float lvl2_min_val = 0; float lvl2_max_val = 0;
-    float lvl3_max_val = 0;
-    float humidity_umbrella_min_val = 0;
-    float humidity_umbrella_max_val = 0;
-    public boolean scarf_enabled = false;
-    public boolean mittens_enabled = false;
-    float longitude_val = 0;
-    float latitude_val = 0;
-    public void restoreSettings() {
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        temperature_option = sharedPref.getInt(getString(R.string.temp_option_key), 0);
-        lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
-        lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
-        lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
-        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
-        humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
-        scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
-        mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
-    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {

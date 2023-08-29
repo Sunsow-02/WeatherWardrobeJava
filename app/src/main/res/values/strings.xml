@@ -47,4 +47,5 @@
     <string name="level_3_description">long-sleeve shirt and jeans</string>
     <string name="level_2_description">long-sleeve shirt, jeans, and a jacket</string>
     <string name="level_1_description">long sleeve shirt, jeans, undershirt, and a winter coat with a hood</string>
+    <string name="current_coordinates_button">Use Current Location</string>
 </resources>

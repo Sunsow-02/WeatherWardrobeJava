@@ -56,6 +56,12 @@
     </LinearLayout>
 
         <Button
+            android:id="@+id/current_coordinates_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/current_coordinates_button"/>
+
+        <Button
             android:id="@+id/submit_coordinates_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

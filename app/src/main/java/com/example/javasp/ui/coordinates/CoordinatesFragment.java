@@ -1,7 +1,10 @@
 package com.example.javasp.ui.coordinates;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -14,12 +17,20 @@ import android.widget.LinearLayout;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.javasp.MainActivity;
 import com.example.javasp.R;
 import com.example.javasp.databinding.FragmentCoordinatesBinding;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -29,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.concurrent.Executor;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -36,8 +48,10 @@ import okhttp3.Response;
 
 public class CoordinatesFragment extends Fragment {
     private FragmentCoordinatesBinding binding;
+    private FusedLocationProviderClient fusedLocationClient;
     public int temperature_option = 0;
-    float lvl2_min_val = 0; float lvl2_max_val = 0;
+    float lvl2_min_val = 0;
+    float lvl2_max_val = 0;
     float lvl3_max_val = 0;
     float humidity_umbrella_min_val = 0;
     float humidity_umbrella_max_val = 0;
@@ -58,24 +72,16 @@ public class CoordinatesFragment extends Fragment {
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
     }
 
-    public Response requestWeatherAPIinfo() {
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("https://weatherapi-com.p.rapidapi.com/current.json?q=" + longitude_val + "%2C" + latitude_val)
-                .get()
-                .addHeader("X-RapidAPI-Key", "6986dd8915msh2eef5c76f8cfe61p14a831jsn211856301e30")
-                .addHeader("X-RapidAPI-Host", "weatherapi-com.p.rapidapi.com")
-                .build();
-
-        try {
-            return client.newCall(request).execute();
-        } catch (IOException e) {
-            Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                            , "Error:" + e.toString(), Snackbar.LENGTH_SHORT)
-                    .show();
-            return null;
-        }
-    }
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your app.
+                } else {
+                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                                    , "Location Permission Not Given", Snackbar.LENGTH_SHORT)
+                            .show();
+                }
+            });
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -89,6 +95,60 @@ public class CoordinatesFragment extends Fragment {
 
         restoreSettings(); //not sure if it should be oncreate or in the on submit coordinates button listener
         Button submit_button = root.findViewById(R.id.submit_coordinates_button);
+        Button current_cords_button = root.findViewById(R.id.current_coordinates_button);
+        MainActivity activity = (MainActivity) getActivity();
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
+
+        if (ContextCompat.checkSelfPermission(
+                activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+            // You can use the API that requires the permission.
+            fusedLocationClient.getLastLocation();
+        } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
+            // In an educational UI, explain to the user why your app requires this
+            // permission for a specific feature to behave as expected, and what
+            // features are disabled if it's declined. In this UI, include a
+            // "cancel" or "no thanks" button that lets the user continue
+            // using your app without granting the permission.
+            //showInContextUI();
+        } else {
+            // You can directly ask for the permission.
+            // The registered ActivityResultCallback gets the result of this request.
+            requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+            fusedLocationClient.getLastLocation();
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener((Executor) this, new OnSuccessListener<Location>() {
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    // Logic to handle location object
+                }
+            }
+        });
+        current_cords_button.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                //request perms if needed, get coordinates, and set text on the 2 textinputs
+                if (ContextCompat.checkSelfPermission(
+                        activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+                    // You can use the API that requires the permission.
+                    fusedLocationClient.getLastLocation();
+                } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
+                    // In an educational UI, explain to the user why your app requires this
+                    // permission for a specific feature to behave as expected, and what
+                    // features are disabled if it's declined. In this UI, include a
+                    // "cancel" or "no thanks" button that lets the user continue
+                    // using your app without granting the permission.
+                    //showInContextUI();
+                } else {
+                    // You can directly ask for the permission.
+                    // The registered ActivityResultCallback gets the result of this request.
+                    requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
+                    fusedLocationClient.getLastLocation();
+                }
+            }
+        });
         submit_button.setOnClickListener(new Button.OnClickListener()
         {
             @Override
