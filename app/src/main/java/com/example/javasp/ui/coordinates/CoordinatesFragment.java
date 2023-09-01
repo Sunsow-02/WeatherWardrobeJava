@@ -76,6 +76,7 @@ public class CoordinatesFragment extends Fragment {
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your app.
+
                 } else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
                                     , "Location Permission Not Given", Snackbar.LENGTH_SHORT)
@@ -93,7 +94,7 @@ public class CoordinatesFragment extends Fragment {
         binding = FragmentCoordinatesBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        restoreSettings(); //not sure if it should be oncreate or in the on submit coordinates button listener
+        restoreSettings();
         Button submit_button = root.findViewById(R.id.submit_coordinates_button);
         Button current_cords_button = root.findViewById(R.id.current_coordinates_button);
         MainActivity activity = (MainActivity) getActivity();
@@ -122,6 +123,13 @@ public class CoordinatesFragment extends Fragment {
                 // Got last known location. In some rare situations this can be null.
                 if (location != null) {
                     // Logic to handle location object
+                    longitude_val = (float) location.getLatitude();
+                    latitude_val = (float) location.getLongitude();
+                }
+                else {
+                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                                    , "Location object returned as null", Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }
         });
