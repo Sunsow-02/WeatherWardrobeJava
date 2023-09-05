@@ -1,6 +1,7 @@
 package com.example.javasp.ui.coordinates;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -118,13 +119,17 @@ public class CoordinatesFragment extends Fragment {
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
             fusedLocationClient.getLastLocation();
         }
-        fusedLocationClient.getLastLocation().addOnSuccessListener((Executor) this, new OnSuccessListener<Location>() {
+        fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
             public void onSuccess(Location location) {
                 // Got last known location. In some rare situations this can be null.
                 if (location != null) {
                     // Logic to handle location object
                     longitude_val = (float) location.getLatitude();
                     latitude_val = (float) location.getLongitude();
+                    //TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
+                    //TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
+                    //longitude.setText(String.valueOf(longitude_val));
+                    //latitude.setText(String.valueOf(latitude_val));
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
