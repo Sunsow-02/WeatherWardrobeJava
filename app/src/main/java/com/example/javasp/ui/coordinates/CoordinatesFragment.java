@@ -124,8 +124,8 @@ public class CoordinatesFragment extends Fragment {
                 // Got last known location. In some rare situations this can be null.
                 if (location != null) {
                     // Logic to handle location object
-                    longitude_val = (float) location.getLatitude();
-                    latitude_val = (float) location.getLongitude();
+                    longitude_val = (float) location.getLongitude();
+                    latitude_val = (float) location.getLatitude();
                     TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
                     TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
                     longitude.setText(String.valueOf(longitude_val));
@@ -200,14 +200,14 @@ public class CoordinatesFragment extends Fragment {
                 if(error == 0) {
                     //popup to notify user
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                    , "Getting weather info for: " + longitude_val + "," + latitude_val, Snackbar.LENGTH_SHORT)
+                                    , "Getting weather info for: " + latitude_val + "," + longitude_val, Snackbar.LENGTH_SHORT)
                             .show();
                     //weather api and get the stuff
                     Response info = null;
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                     String currentDateAndTime = sdf.format(new Date());
                     String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
-                    longitude_val + "%2C" + latitude_val + "/" + currentDateAndTime + "/" +
+                    latitude_val + "%2C" + longitude_val + "/" + currentDateAndTime + "/" +
                             "?unitGroup=us&key=WL7ANYRTY74KNGD5ZWUTESPEV&contentType=json";
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
