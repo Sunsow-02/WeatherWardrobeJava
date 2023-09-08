@@ -13,12 +13,6 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="@string/more_info_1"
-        tools:ignore="MissingConstraints" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="fill_parent"

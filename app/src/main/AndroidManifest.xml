@@ -16,7 +16,7 @@
         android:theme="@style/Theme.JavaSP"
         tools:targetApi="31">
         <service
-            android:name="MyNavigationService"
+            android:name="CoordinatesFragment"
             android:foregroundServiceType="location">
         </service>
         <activity

@@ -77,7 +77,6 @@ public class CoordinatesFragment extends Fragment {
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
                 if (isGranted) {
                     // Permission is granted. Continue the action or workflow in your app.
-
                 } else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
                                     , "Location Permission Not Given", Snackbar.LENGTH_SHORT)
@@ -102,9 +101,10 @@ public class CoordinatesFragment extends Fragment {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
 
         if (ContextCompat.checkSelfPermission(
-                activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                activity, Manifest.permission.ACCESS_COARSE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
             // You can use the API that requires the permission.
+            //requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
             fusedLocationClient.getLastLocation();
         } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
             // In an educational UI, explain to the user why your app requires this
@@ -126,10 +126,10 @@ public class CoordinatesFragment extends Fragment {
                     // Logic to handle location object
                     longitude_val = (float) location.getLatitude();
                     latitude_val = (float) location.getLongitude();
-                    //TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
-                    //TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
-                    //longitude.setText(String.valueOf(longitude_val));
-                    //latitude.setText(String.valueOf(latitude_val));
+                    TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
+                    TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
+                    longitude.setText(String.valueOf(longitude_val));
+                    latitude.setText(String.valueOf(latitude_val));
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
