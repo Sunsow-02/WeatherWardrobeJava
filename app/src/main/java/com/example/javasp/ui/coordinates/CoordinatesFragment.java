@@ -99,6 +99,8 @@ public class CoordinatesFragment extends Fragment {
         Button current_cords_button = root.findViewById(R.id.current_coordinates_button);
         MainActivity activity = (MainActivity) getActivity();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
+        TextInputEditText longitude_input = root.findViewById(R.id.coordinates_longitude_input);
+        TextInputEditText latitude_input = root.findViewById(R.id.coordinates_latitude_input);
 
         if (ContextCompat.checkSelfPermission(
                 activity, Manifest.permission.ACCESS_COARSE_LOCATION) ==
@@ -106,6 +108,8 @@ public class CoordinatesFragment extends Fragment {
             // You can use the API that requires the permission.
             //requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
             fusedLocationClient.getLastLocation();
+            longitude_input.setText(String.valueOf(longitude_val));
+            latitude_input.setText(String.valueOf(latitude_val));
         } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
             // In an educational UI, explain to the user why your app requires this
             // permission for a specific feature to behave as expected, and what
@@ -118,6 +122,8 @@ public class CoordinatesFragment extends Fragment {
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
             fusedLocationClient.getLastLocation();
+            longitude_input.setText(String.valueOf(longitude_val));
+            latitude_input.setText(String.valueOf(latitude_val));
         }
         fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
             public void onSuccess(Location location) {
@@ -126,10 +132,10 @@ public class CoordinatesFragment extends Fragment {
                     // Logic to handle location object
                     longitude_val = (float) location.getLongitude();
                     latitude_val = (float) location.getLatitude();
-                    TextInputEditText longitude = getActivity().findViewById(R.id.coordinates_longitude_input);
-                    TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
-                    longitude.setText(String.valueOf(longitude_val));
-                    latitude.setText(String.valueOf(latitude_val));
+                    //TextInputEditText longitude_input = getView().findViewById(R.id.coordinates_longitude_input);
+                    //TextInputEditText latitude_input = getView().findViewById(R.id.coordinates_latitude_input);
+                    //longitude_input.setText(String.valueOf(longitude_val));
+                    //latitude_input.setText(String.valueOf(latitude_val));
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
@@ -142,11 +148,15 @@ public class CoordinatesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 //request perms if needed, get coordinates, and set text on the 2 textinputs
+                TextInputEditText longitude_input = getActivity().findViewById(R.id.coordinates_longitude_input);
+                TextInputEditText latitude_input = getActivity().findViewById(R.id.coordinates_latitude_input);
                 if (ContextCompat.checkSelfPermission(
                         activity, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
                         PackageManager.PERMISSION_GRANTED) {
                     // You can use the API that requires the permission.
                     fusedLocationClient.getLastLocation();
+                    longitude_input.setText(String.valueOf(longitude_val));
+                    latitude_input.setText(String.valueOf(latitude_val));
                 } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
                     // In an educational UI, explain to the user why your app requires this
                     // permission for a specific feature to behave as expected, and what
@@ -159,6 +169,8 @@ public class CoordinatesFragment extends Fragment {
                     // The registered ActivityResultCallback gets the result of this request.
                     requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
                     fusedLocationClient.getLastLocation();
+                    longitude_input.setText(String.valueOf(longitude_val));
+                    latitude_input.setText(String.valueOf(latitude_val));
                 }
             }
         });
@@ -170,8 +182,6 @@ public class CoordinatesFragment extends Fragment {
                 TextInputEditText latitude = getActivity().findViewById(R.id.coordinates_latitude_input);
                 TextInputLayout long_layout = getActivity().findViewById(R.id.coordinates_longitude_layout);
                 TextInputLayout lati_layout = getActivity().findViewById(R.id.coordinates_latitude_layout);
-
-                //TODO: perhaps require coordinates instead of defaulting to 0,0 with no input? (low priority)
 
                 if(!longitude.getText().toString().equals("")) {
                     longitude_val = Float.parseFloat(String.valueOf(longitude.getText()));

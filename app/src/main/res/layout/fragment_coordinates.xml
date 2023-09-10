@@ -25,19 +25,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            app:endIconMode="clear_text"
-            android:layout_weight="1"
-            android:id="@+id/coordinates_longitude_layout"
-            android:hint="@string/coordinates_long_hint">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:id="@+id/coordinates_longitude_input"
-                android:inputType="numberDecimal|numberSigned" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="fill_parent"
@@ -50,6 +37,20 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:id="@+id/coordinates_latitude_input"
+                android:inputType="numberDecimal|numberSigned" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            app:endIconMode="clear_text"
+            android:layout_weight="1"
+            android:id="@+id/coordinates_longitude_layout"
+            android:hint="@string/coordinates_long_hint">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/coordinates_longitude_input"
                 android:inputType="numberDecimal|numberSigned" />
         </com.google.android.material.textfield.TextInputLayout>
 

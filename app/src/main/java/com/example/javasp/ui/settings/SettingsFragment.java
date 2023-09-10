@@ -56,7 +56,7 @@ public class SettingsFragment extends Fragment {
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
-        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
+        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_min_key), 5);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
@@ -250,6 +250,8 @@ public class SettingsFragment extends Fragment {
         lvl2_min_input.setText(String.valueOf(lvl2_min_val));
         lvl2_max_input.setText(String.valueOf(lvl2_max_val));
         lvl3_max_input.setText(String.valueOf(lvl3_max_val));
+        TextInputEditText humidity_umbrella_min_input = root.findViewById(R.id.humidity_umbrella_min_input);
+        humidity_umbrella_min_input.setText(String.valueOf(humidity_umbrella_min_val));
         TextInputEditText humidity_umbrella_max_input = root.findViewById(R.id.humidity_umbrella_max_input);
         humidity_umbrella_max_input.setText(String.valueOf(humidity_umbrella_max_val));
         if(scarf_enabled) {scarf_toggle.toggle(); }
