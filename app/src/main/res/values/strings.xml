@@ -31,6 +31,7 @@
     <string name="temp_lvl3max_key">tLYos1B</string>
     <string name="humidity_umbrella_min_key">8NO$)Vv</string>
     <string name="humidity_umbrella_max_key">SU4NeKk</string>
+    <string name="wind_speed_option_key">A8^23Jk</string>
     <string name="scarf_enabled_key">arbjo53</string>
     <string name="mittens_enabled_key">ryL9a7q</string>
     <string name="coordinates_rec_level_hint">Recommended Level:</string>
@@ -48,4 +49,7 @@
     <string name="level_2_description">long-sleeve shirt, jeans, and a jacket</string>
     <string name="level_1_description">long sleeve shirt, jeans, undershirt, and a winter coat with a hood</string>
     <string name="current_coordinates_button">Use Current Location</string>
+    <string name="mph">MPH</string>
+    <string name="kph">KM/H</string>
+    <string name="wind_speed_unit_header">Wind Speed Unit</string>
 </resources>

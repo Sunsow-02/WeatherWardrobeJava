@@ -56,6 +56,7 @@ public class CoordinatesFragment extends Fragment {
     float lvl3_max_val = 0;
     float humidity_umbrella_min_val = 0;
     float humidity_umbrella_max_val = 0;
+    public int wind_speed_option = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
     float longitude_val = 0;
@@ -69,6 +70,7 @@ public class CoordinatesFragment extends Fragment {
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
         humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
+        wind_speed_option = sharedPref.getInt(getString(R.string.wind_speed_option_key), 0);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
     }
@@ -107,7 +109,7 @@ public class CoordinatesFragment extends Fragment {
                 PackageManager.PERMISSION_GRANTED) {
             // You can use the API that requires the permission.
             //requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-            fusedLocationClient.getLastLocation();
+            //fusedLocationClient.getLastLocation();
             longitude_input.setText(String.valueOf(longitude_val));
             latitude_input.setText(String.valueOf(latitude_val));
         } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
@@ -121,7 +123,7 @@ public class CoordinatesFragment extends Fragment {
             // You can directly ask for the permission.
             // The registered ActivityResultCallback gets the result of this request.
             requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-            fusedLocationClient.getLastLocation();
+            //fusedLocationClient.getLastLocation();
             longitude_input.setText(String.valueOf(longitude_val));
             latitude_input.setText(String.valueOf(latitude_val));
         }
@@ -139,7 +141,7 @@ public class CoordinatesFragment extends Fragment {
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                    , "Location object returned as null", Snackbar.LENGTH_SHORT)
+                                    , "Please try again", Snackbar.LENGTH_SHORT)
                             .show();
                 }
             }
@@ -246,6 +248,7 @@ public class CoordinatesFragment extends Fragment {
                             String recommened_level_description = "";
                             String recommended_clothing_items = "";
                             String temperature_str = "";
+                            String wind_speed_str = "";
                             float humidity = 0; float wind_speed = 0;
                             JSONObject obj = weatherData2.getJSONObject(0);
                             Log.d("I", obj.toString());
@@ -275,6 +278,17 @@ public class CoordinatesFragment extends Fragment {
                                 } else {
                                     recommended_clothing_items += "Raincoat\n";
                                 }
+                            }
+
+                            if(wind_speed_option != 0) {
+                                //convert to km/h
+                                wind_speed = (float) (wind_speed * 1.609);
+                                wind_speed_str += String.valueOf(wind_speed);
+                                wind_speed_str += "KM/H";
+                            }
+                            else {
+                                wind_speed_str += String.valueOf(wind_speed);
+                                wind_speed_str += "MPH";
                             }
 
                             //then use the settings/numbers fetched and determine recommended level/respective description
@@ -317,7 +331,7 @@ public class CoordinatesFragment extends Fragment {
                             rec_level_description.setText(recommened_level_description);
                             temp.setText(temperature_str);
                             humi.setText(String.valueOf(humidity));
-                            windspd.setText(String.valueOf(wind_speed) + "MPH"); //TODO: make windspeed unit a setting? (low priority)
+                            windspd.setText(wind_speed_str);
                             rec_clothing_items_text.setText(recommended_clothing_items);
                             //make them visible
                             rec_level_layout.setVisibility(View.VISIBLE);

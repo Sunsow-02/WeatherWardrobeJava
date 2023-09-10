@@ -31,6 +31,7 @@ public class SettingsFragment extends Fragment {
     float lvl3_max_val = 0;
     float humidity_umbrella_min_val = 0;
     float humidity_umbrella_max_val = 0;
+    int wind_speed_option = 0;
     public boolean scarf_enabled = false;
     public boolean mittens_enabled = false;
 
@@ -43,6 +44,7 @@ public class SettingsFragment extends Fragment {
         editor.putFloat(getString(R.string.temp_lvl3max_key), lvl3_max_val);
         editor.putFloat(getString(R.string.humidity_umbrella_min_key), humidity_umbrella_min_val);
         editor.putFloat(getString(R.string.humidity_umbrella_max_key), humidity_umbrella_max_val);
+        editor.putInt(getString(R.string.wind_speed_option_key), wind_speed_option);
         editor.putBoolean(getString(R.string.scarf_enabled_key), scarf_enabled);
         editor.putBoolean(getString(R.string.mittens_enabled_key), mittens_enabled);
         editor.apply();
@@ -58,11 +60,13 @@ public class SettingsFragment extends Fragment {
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
         humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_min_key), 5);
         humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
+        wind_speed_option = sharedPref.getInt(getString(R.string.wind_speed_option_key), 0);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
     }
 
-    RadioGroup radioGroup;
+    RadioGroup radioGroup_temp;
+    RadioGroup radioGroup_wind_speed;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,8 +74,9 @@ public class SettingsFragment extends Fragment {
         View root = binding.getRoot();
 
         //radiogroup from temperature option
-        radioGroup = root.findViewById(R.id.temp_option_group);
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        radioGroup_temp = root.findViewById(R.id.temp_option_group);
+        radioGroup_wind_speed = root.findViewById(R.id.wind_speed_unit_group);
+        radioGroup_temp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 // checkedId is the RadioButton selected
@@ -83,6 +88,18 @@ public class SettingsFragment extends Fragment {
                 }
                 else {
                     temperature_option = 2;
+                }
+            }
+        });
+
+        radioGroup_wind_speed.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                if(checkedId == R.id.radio_mph) {
+                    temperature_option = 0;
+                }
+                else {
+                    temperature_option = 1;
                 }
             }
         });
@@ -235,15 +252,16 @@ public class SettingsFragment extends Fragment {
         //update the ui to reflect the settings, where it be saved/default ones
         switch (temperature_option) {
             case 0:
-                radioGroup.check(R.id.radio_f);
+                radioGroup_temp.check(R.id.radio_f);
                 break;
             case 1:
-                radioGroup.check(R.id.radio_c);
+                radioGroup_temp.check(R.id.radio_c);
                 break;
             default:
-                radioGroup.check(R.id.radio_k);
+                radioGroup_temp.check(R.id.radio_k);
                 break;
         }
+
         TextInputEditText lvl2_min_input = root.findViewById(R.id.temp_lvl_2_min_input);
         TextInputEditText lvl2_max_input = root.findViewById(R.id.temp_lvl_2_max_input);
         TextInputEditText lvl3_max_input = root.findViewById(R.id.temp_lvl_3_max_input);
@@ -253,6 +271,14 @@ public class SettingsFragment extends Fragment {
         TextInputEditText humidity_umbrella_min_input = root.findViewById(R.id.humidity_umbrella_min_input);
         humidity_umbrella_min_input.setText(String.valueOf(humidity_umbrella_min_val));
         TextInputEditText humidity_umbrella_max_input = root.findViewById(R.id.humidity_umbrella_max_input);
+        switch (wind_speed_option) {
+            case 0:
+                radioGroup_wind_speed.check(R.id.radio_mph);
+                break;
+            default:
+                radioGroup_wind_speed.check(R.id.radio_kph);
+                break;
+        }
         humidity_umbrella_max_input.setText(String.valueOf(humidity_umbrella_max_val));
         if(scarf_enabled) {scarf_toggle.toggle(); }
         if(mittens_enabled) {mittens_toggle.toggle(); }
