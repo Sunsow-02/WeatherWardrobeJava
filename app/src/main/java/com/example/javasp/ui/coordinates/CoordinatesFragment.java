@@ -1,7 +1,6 @@
 package com.example.javasp.ui.coordinates;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -21,9 +20,7 @@ import java.util.Date;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.javasp.MainActivity;
@@ -41,39 +38,30 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.concurrent.Executor;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import com.example.javasp.ui.BaseFrag;
 
-public class CoordinatesFragment extends Fragment {
+public class CoordinatesFragment extends BaseFrag {
     private FragmentCoordinatesBinding binding;
     private FusedLocationProviderClient fusedLocationClient;
-    public int temperature_option = 0;
-    float lvl2_min_val = 0;
-    float lvl2_max_val = 0;
-    float lvl3_max_val = 0;
-    float humidity_umbrella_min_val = 0;
-    float humidity_umbrella_max_val = 0;
-    public int wind_speed_option = 0;
-    public boolean scarf_enabled = false;
-    public boolean mittens_enabled = false;
     float longitude_val = 0;
     float latitude_val = 0;
 
-    public void restoreSettings() {
+    /*private void restoreSettings() {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         temperature_option = sharedPref.getInt(getString(R.string.temp_option_key), 0);
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
-        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 5);
-        humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
+        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_min_key), 65);
+        humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 70);
         wind_speed_option = sharedPref.getInt(getString(R.string.wind_speed_option_key), 0);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
-    }
+    }*/
 
     private ActivityResultLauncher<String> requestPermissionLauncher =
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
@@ -89,6 +77,7 @@ public class CoordinatesFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
         StrictMode.setThreadPolicy(policy);
         CoordinatesViewModel dashboardViewModel =
                 new ViewModelProvider(this).get(CoordinatesViewModel.class);

@@ -22,20 +22,11 @@ import com.example.javasp.databinding.FragmentSettingsBinding;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.example.javasp.ui.BaseFrag;
 
-public class SettingsFragment extends Fragment {
-
+public class SettingsFragment extends BaseFrag {
     private FragmentSettingsBinding binding;
-    public int temperature_option = 0;
-    float lvl2_min_val = 0; float lvl2_max_val = 0;
-    float lvl3_max_val = 0;
-    float humidity_umbrella_min_val = 0;
-    float humidity_umbrella_max_val = 0;
-    int wind_speed_option = 0;
-    public boolean scarf_enabled = false;
-    public boolean mittens_enabled = false;
-
-    public void saveSettings() {
+    /*private void saveSettings() {
         SharedPreferences sharedPreferences = getActivity().getPreferences(Context.MODE_PRIVATE); //might cause problems (look into workaround for getDefaultSharedPref)
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(getString(R.string.temp_option_key), temperature_option);
@@ -48,9 +39,9 @@ public class SettingsFragment extends Fragment {
         editor.putBoolean(getString(R.string.scarf_enabled_key), scarf_enabled);
         editor.putBoolean(getString(R.string.mittens_enabled_key), mittens_enabled);
         editor.apply();
-    }
+    }*/
 
-    public void restoreSettings() {
+    /*private void restoreSettings() {
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         //2nd param of get is default value if it cant be found
         //assigning values not rlly necessary but should be done for consistency
@@ -58,12 +49,12 @@ public class SettingsFragment extends Fragment {
         lvl2_min_val = sharedPref.getFloat(getString(R.string.temp_lvl2min_key), 25);
         lvl2_max_val = sharedPref.getFloat(getString(R.string.temp_lvl2max_key), 45);
         lvl3_max_val = sharedPref.getFloat(getString(R.string.temp_lvl3max_key), 65);
-        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_min_key), 5);
-        humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 10);
+        humidity_umbrella_min_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_min_key), 65);
+        humidity_umbrella_max_val = sharedPref.getFloat(getString(R.string.humidity_umbrella_max_key), 70);
         wind_speed_option = sharedPref.getInt(getString(R.string.wind_speed_option_key), 0);
         scarf_enabled = sharedPref.getBoolean(getString(R.string.scarf_enabled_key), true);
         mittens_enabled = sharedPref.getBoolean(getString(R.string.mittens_enabled_key), true);
-    }
+    }*/
 
     RadioGroup radioGroup_temp;
     RadioGroup radioGroup_wind_speed;

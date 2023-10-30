@@ -66,7 +66,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/temp_lvl_2_min_input"
-                        android:inputType="text" />
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/temp_lvl_2_max_input"
-                        android:inputType="text" />
+                        android:inputType="numberDecimal|numberSigned" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -94,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/temp_lvl_3_max_input"
-                        android:inputType="text" />
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -119,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/humidity_umbrella_min_input"
-                        android:inputType="text" />
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:id="@+id/humidity_umbrella_max_input"
-                        android:inputType="text" />
+                        android:inputType="numberDecimal|numberSigned"/>
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
