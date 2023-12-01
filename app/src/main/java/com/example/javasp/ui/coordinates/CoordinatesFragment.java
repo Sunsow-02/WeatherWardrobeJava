@@ -90,51 +90,6 @@ public class CoordinatesFragment extends BaseFrag {
         Button current_cords_button = root.findViewById(R.id.current_coordinates_button);
         MainActivity activity = (MainActivity) getActivity();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity);
-        TextInputEditText longitude_input = root.findViewById(R.id.coordinates_longitude_input);
-        TextInputEditText latitude_input = root.findViewById(R.id.coordinates_latitude_input);
-
-        if (ContextCompat.checkSelfPermission(
-                activity, Manifest.permission.ACCESS_COARSE_LOCATION) ==
-                PackageManager.PERMISSION_GRANTED) {
-            // You can use the API that requires the permission.
-            //requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-            //fusedLocationClient.getLastLocation();
-            longitude_input.setText(String.valueOf(longitude_val));
-            latitude_input.setText(String.valueOf(latitude_val));
-        } else if (shouldShowRequestPermissionRationale("Getting current coordinates requires location permissions")) {
-            // In an educational UI, explain to the user why your app requires this
-            // permission for a specific feature to behave as expected, and what
-            // features are disabled if it's declined. In this UI, include a
-            // "cancel" or "no thanks" button that lets the user continue
-            // using your app without granting the permission.
-            //showInContextUI();
-        } else {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
-            requestPermissionLauncher.launch(android.Manifest.permission.ACCESS_COARSE_LOCATION);
-            //fusedLocationClient.getLastLocation();
-            longitude_input.setText(String.valueOf(longitude_val));
-            latitude_input.setText(String.valueOf(latitude_val));
-        }
-        fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
-            public void onSuccess(Location location) {
-                // Got last known location. In some rare situations this can be null.
-                if (location != null) {
-                    // Logic to handle location object
-                    longitude_val = (float) location.getLongitude();
-                    latitude_val = (float) location.getLatitude();
-                    //TextInputEditText longitude_input = getView().findViewById(R.id.coordinates_longitude_input);
-                    //TextInputEditText latitude_input = getView().findViewById(R.id.coordinates_latitude_input);
-                    //longitude_input.setText(String.valueOf(longitude_val));
-                    //latitude_input.setText(String.valueOf(latitude_val));
-                }
-                else {
-                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
-                                    , "Please try again", Snackbar.LENGTH_SHORT)
-                            .show();
-                }
-            }
-        });
         current_cords_button.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -154,7 +109,7 @@ public class CoordinatesFragment extends BaseFrag {
                     // features are disabled if it's declined. In this UI, include a
                     // "cancel" or "no thanks" button that lets the user continue
                     // using your app without granting the permission.
-                    //showInContextUI();
+                    // showInContextUI();
                 } else {
                     // You can directly ask for the permission.
                     // The registered ActivityResultCallback gets the result of this request.
@@ -162,6 +117,27 @@ public class CoordinatesFragment extends BaseFrag {
                     fusedLocationClient.getLastLocation();
                     longitude_input.setText(String.valueOf(longitude_val));
                     latitude_input.setText(String.valueOf(latitude_val));
+                }
+            }
+
+        });
+
+        fusedLocationClient.getLastLocation().addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
+            public void onSuccess(Location location) {
+                // Got last known location. In some rare situations this can be null.
+                if (location != null) {
+                    // Logic to handle location object
+                    longitude_val = (float) location.getLongitude();
+                    latitude_val = (float) location.getLatitude();
+                    //TextInputEditText longitude_input = getView().findViewById(R.id.coordinates_longitude_input);
+                    //TextInputEditText latitude_input = getView().findViewById(R.id.coordinates_latitude_input);
+                    //longitude_input.setText(String.valueOf(longitude_val));
+                    //latitude_input.setText(String.valueOf(latitude_val));
+                }
+                else {
+                    Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
+                                    , "Please try again", Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }
         });
