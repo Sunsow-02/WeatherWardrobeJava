@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -116,10 +117,10 @@ public class CoordinatesFragment extends BaseFrag {
                     // Logic to handle location object
                     longitude_val = (float) location.getLongitude();
                     latitude_val = (float) location.getLatitude();
-                    //TextInputEditText longitude_input = getView().findViewById(R.id.coordinates_longitude_input);
-                    //TextInputEditText latitude_input = getView().findViewById(R.id.coordinates_latitude_input);
-                    //longitude_input.setText(String.valueOf(longitude_val));
-                    //latitude_input.setText(String.valueOf(latitude_val));
+                    TextInputEditText longitude_input = getView().findViewById(R.id.coordinates_longitude_input);
+                    TextInputEditText latitude_input = getView().findViewById(R.id.coordinates_latitude_input);
+                    longitude_input.setText(String.valueOf(longitude_val));
+                    latitude_input.setText(String.valueOf(latitude_val));
                 }
                 else {
                     Snackbar.make(getActivity().findViewById(R.id.coordinates_parent)
@@ -172,7 +173,7 @@ public class CoordinatesFragment extends BaseFrag {
                     String currentDateAndTime = sdf.format(new Date());
                     String url = "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/" +
                     latitude_val + "%2C" + longitude_val + "/" + currentDateAndTime + "/" +
-                            "?unitGroup=us&key=WL7ANYRTY74KNGD5ZWUTESPEV&contentType=json";
+                            "?unitGroup=us&key=PLACEHOLDERKEY&contentType=json";
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             .url(url)
@@ -213,7 +214,9 @@ public class CoordinatesFragment extends BaseFrag {
                                     temperature_str += "°F";
                                     break;
                                 case 1:
-                                    temperature = (temperature - 32)* (5/9);
+                                    temperature = (temperature - 32) * 5/9;
+                                    DecimalFormat df = new DecimalFormat("#.##");
+                                    temperature = Float.valueOf(df.format(temperature));
                                     temperature_str += String.valueOf(temperature);
                                     temperature_str += "°C";
                                     break;
